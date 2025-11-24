@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Roca Steak House – Inicio</title>
+
+  <!-- Estilos -->
+  <link rel="stylesheet" href="css/main.css">
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body>
+  <!-- Toast global -->
+  <div id="toast" class="toast">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div id="toast-title" class="toast-title"></div>
+      <div id="toast-message" class="toast-message"></div>
+    </div>
+    <button id="toast-close" class="toast-close">&times;</button>
+  </div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <span class="logo"><ion-icon name="flame-outline"></ion-icon></span>
+        <span>Roca Steak House</span>
+      </div>
+      <button id="burger" class="burger" aria-label="Abrir menú">
+        <ion-icon name="menu-outline"></ion-icon>
+      </button>
+      <div id="navMenu" class="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#carta">Carta</a>
+        <a href="#contacto">Contacto</a>
+        <a href="login.html" class="btn-nav">Reservar</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <header id="inicio" class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="kicker">Huacachina · Ica · Perú</p>
+        <h1>Roca Steak House</h1>
+        <p class="lead">
+          Disfruta cortes americanos y argentinos de primera, parrillas al carbón y maridaje con vinos,
+          en el punto de encuentro de los que disfrutan la buena mesa en Ica.
+        </p>
+
+        <div class="trip-badge">
+          <ion-icon name="star"></ion-icon>
+          <div>
+            <strong>5.0 / 5 en Tripadvisor</strong>
+            <span>N.º 6 de 206 restaurantes en Ica · Travellers' Choice</span>
+          </div>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#carta" class="btn primary">
+            <ion-icon name="restaurant-outline"></ion-icon> Ver carta
+          </a>
+          <a href="login.html" class="btn ghost" id="btnHeroReservar">
+            <ion-icon name="calendar-outline"></ion-icon> Reservar ahora
+          </a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="https://images.unsplash.com/photo-1600891964092-4316c288032e?auto=format&fit=crop&w=900&q=80"
+             alt="Parrilla en Roca Steak House">
+      </div>
+    </div>
+  </header>
+
+  <!-- NOSOTROS -->
+  <section id="nosotros" class="section">
+    <div class="wrap">
+      <h2 class="section-title">Nosotros</h2>
+      <p class="section-subtitle">Cortes premium y maridaje en el corazón de Ica</p>
+
+      <div class="grid-2">
+        <div class="panel">
+          <p>
+            En <strong>Roca Steak House</strong> compartes con familia y amigos los mejores cortes
+            americanos y argentinos de toda Ica, acompañados de vinos cuidadosamente seleccionados.
+          </p>
+          <p>
+            Trabajamos con carnes de alta calidad, cocidas al punto ideal sobre carbón y leña, para
+            que cada visita sea una experiencia completa: comida, servicio y ambiente.
+          </p>
+          <p>
+            Nuestro equipo se enfoca en explicarte cada corte y recomendarte el maridaje perfecto con
+            vinos de Perú, España, Italia y Francia.
+          </p>
+
+          <ul class="bullets">
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Cortes americanos y argentinos de alta calidad.</span>
+            </li>
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Ambiente ideal para familia, amigos o pareja.</span>
+            </li>
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ion-icon>
+              <span>Bar completo, música en vivo y maridaje con vinos.</span>
+            </li>
+            <li>
+              <ion-icon name="checkmark-circle-outline"></ionicon>
+              <span>Almuerzo y cena todos los días.</span>
+            </li>
+          </ul>
+
+          <div class="opiniones-box">
+            <h3>Lo que dicen nuestros visitantes</h3>
+            <p class="op-item">
+              <ion-icon name="chatbubbles-outline"></ion-icon>
+              “Excelente lugar para probar buenos cortes, servicio atento y ambiente muy lindo.”
+            </p>
+            <p class="op-item">
+              <ion-icon name="chatbubbles-outline"></ion-icon>
+              “Calidad por donde veas: carne, atención y vinos. Altamente recomendable.”
+            </p>
+          </div>
+        </div>
+        <div class="panel">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80"
+               alt="Ambiente del restaurante">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CARTA -->
+  <section id="carta" class="section">
+    <div class="wrap">
+      <h2 class="section-title">Nuestra Carta</h2>
+      <p class="section-subtitle">
+        Algunos de los platos que encuentras en Roca Steak House. Los precios son referenciales y pueden variar.
+      </p>
+
+      <div id="tabs" class="tabs"></div>
+      <div id="menuContent" class="menu-grid"></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto" class="section">
+    <div class="wrap grid-2">
+      <div class="panel">
+        <h3><ion-icon name="location-outline"></ion-icon> Ubicación</h3>
+        <p>Calle Raúl Boza 439, Ica 11000, Perú</p>
+        <p class="muted">A pocos minutos de la Huacachina.</p>
+        <a class="btn primary" target="_blank"
+           href="https://maps.app.goo.gl/2fFcf6WrHtAyLBdU9">
+          <ion-icon name="map-outline"></ion-icon> Ver en Google Maps
+        </a>
+      </div>
+      <div class="panel">
+        <h3><ion-icon name="call-outline"></ion-icon> Reservas</h3>
+        <p><strong>Teléfono / WhatsApp:</strong> +51 986 786 940</p>
+        <p><strong>Horario:</strong> todos los días de 12:00 p.m. a 11:45 p.m.</p>
+        <p class="muted">Atendemos almuerzo y cena, con bar completo, vinos y música en vivo en ciertas fechas.</p>
+        <a href="login.html" class="btn ghost">
+          <ion-icon name="calendar-outline"></ion-icon> Reservar en línea (demo)
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <small>© 2025 Roca Steak House – Todos los derechos reservados</small>
+      <a href="#inicio" class="link-top">
+        Volver arriba <ion-icon name="chevron-up-outline"></ion-icon>
+      </a>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

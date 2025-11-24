@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Administrador – Roca Steak House</title>
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/panel.css">
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="panel-body">
+
+  <!-- Toast -->
+  <div id="toast" class="toast">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div id="toast-title" class="toast-title"></div>
+      <div id="toast-message" class="toast-message"></div>
+    </div>
+    <button id="toast-close" class="toast-close">&times;</button>
+  </div>
+
+  <div class="panel-layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sb-brand">
+        <ion-icon name="flame-outline"></ion-icon>
+        <span>Administrador</span>
+      </div>
+
+      <nav class="sb-nav">
+        <button class="sb-link active" data-view="reservas">
+          <ion-icon name="calendar-outline"></ion-icon> Reservas
+        </button>
+        <button class="sb-link" data-view="mesas">
+          <ion-icon name="grid-outline"></ion-icon> Mesas
+        </button>
+      </nav>
+
+      <button id="btnLogoutAdmin" class="btn ghost full">
+        <ion-icon name="log-out-outline"></ion-icon> Cerrar sesión
+      </button>
+
+      <a class="btn text full" href="index.html">
+        <ion-icon name="home-outline"></ion-icon> Volver al inicio
+      </a>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="panel-main">
+
+      <header class="panel-header">
+        <div>
+          <h1>Panel de Administración</h1>
+          <p id="adminWelcome" class="muted"></p>
+        </div>
+      </header>
+
+      <!-- RESERVAS -->
+      <section id="view-reservas" class="panel-section active">
+        <h2>Reservas del restaurante</h2>
+        <p class="muted">Gestiona las solicitudes de reserva enviadas por los clientes.</p>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Personas</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="adminResBody">
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- MESAS -->
+      <section id="view-mesas" class="panel-section">
+        <h2>Distribución de Mesas</h2>
+        <p class="muted">Vista referencial de la disposición de mesas en Roca Steak House.</p>
+        <div id="mesasGrid" class="mesas-grid"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

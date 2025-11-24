@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel Cliente – Roca Steak House</title>
+
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/panel.css">
+
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</head>
+<body class="panel-body">
+  <div id="toast" class="toast">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div id="toast-title" class="toast-title"></div>
+      <div id="toast-message" class="toast-message"></div>
+    </div>
+    <button id="toast-close" class="toast-close">&times;</button>
+  </div>
+
+  <div class="panel-layout">
+    <aside class="sidebar">
+      <div class="sb-brand">
+        <ion-icon name="people-outline"></ion-icon>
+        <span>Cliente</span>
+      </div>
+      <nav class="sb-nav">
+        <button class="sb-link active" data-view="nueva">Nueva reserva</button>
+        <button class="sb-link" data-view="mis">Mis reservas</button>
+      </nav>
+      <button id="btnLogoutCliente" class="btn ghost full">
+        <ion-icon name="log-out-outline"></ion-icon> Cerrar sesión
+      </button>
+      <a class="btn text full" href="index.html">
+        <ion-icon name="home-outline"></ion-icon> Volver al inicio
+      </a>
+    </aside>
+
+    <main class="panel-main">
+      <header class="panel-header">
+        <div>
+          <h1>Panel del Cliente</h1>
+          <p id="clienteWelcome" class="muted"></p>
+        </div>
+      </header>
+
+      <!-- Nueva Reserva -->
+      <section id="view-nueva" class="panel-section active">
+        <h2>Crear una nueva reserva</h2>
+        <p class="muted">Completa los siguientes datos y envía tu solicitud. Te confirmaremos lo antes posible.</p>
+
+        <form id="clienteReservaForm" class="form grid-2">
+          <div>
+            <label class="form-label">Fecha</label>
+            <input id="resFecha" type="date" class="form-input" required>
+
+            <label class="form-label">Hora</label>
+            <input id="resHora" type="time" class="form-input" required>
+
+            <label class="form-label">Número de personas</label>
+            <select id="resPersonas" class="form-input">
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="form-label">Comentarios adicionales</label>
+            <textarea id="resNotas" rows="5" class="form-input"
+              placeholder="Ejemplo: Aniversario, cumple, mesa con vista, intolerancias alimentarias..."></textarea>
+
+            <div class="form-actions">
+              <button type="submit" class="btn primary">Enviar solicitud</button>
+            </div>
+          </div>
+        </form>
+      </section>
+
+      <!-- Mis reservas -->
+      <section id="view-mis" class="panel-section">
+        <h2>Mis reservas</h2>
+        <p class="muted">Aquí podrás ver el estado de tus reservas enviadas.</p>
+
+        <div id="misReservasLista" class="reservas-lista"></div>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cliente.js"></script>
+</body>
+</html>
+  
