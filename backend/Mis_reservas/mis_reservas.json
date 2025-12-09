@@ -1,0 +1,26 @@
+[
+  {
+    "id": 2,
+    "usuario_id": 2,
+    "cliente_nombre": "david",
+    "fecha": "2025-12-09",
+    "hora": "12:00",
+    "personas": "2",
+    "mesa_id": "1",
+    "notas": "c",
+    "estado": "pendiente",
+    "created_at": "2025-12-09T07:27:13.989Z"
+  },
+  {
+    "id": 3,
+    "usuario_id": 2,
+    "cliente_nombre": "david",
+    "fecha": "2025-12-09",
+    "hora": "12:00",
+    "personas": "2",
+    "mesa_id": "8",
+    "notas": "",
+    "estado": "pendiente",
+    "created_at": "2025-12-09T07:27:51.726Z"
+  }
+]

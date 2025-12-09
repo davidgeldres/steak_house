@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "usuario_id": 2,
+    "cliente_nombre": "david",
+    "fecha": "2025-12-07",
+    "hora": "14:00",
+    "personas": "4",
+    "mesa_id": "2",
+    "notas": "a lado de la ventana",
+    "estado": "pendiente",
+    "created_at": "2025-12-08T03:16:35.178Z"
+  }
+]

@@ -1,127 +1,803 @@
-.panel-body{
-  background:#050507;
-  color:var(--text);
-  min-height:100vh;
-}
-.panel-layout{
-  display:grid;
-  grid-template-columns:260px minmax(0,1fr);
-  min-height:100vh;
-}
-.sidebar{
-  background:#080810;
-  padding:18px 16px;
-  border-right:1px solid rgba(255,255,255,.08);
-  display:flex;
-  flex-direction:column;
-  gap:16px;
-}
-.sb-brand{
-  font-weight:700;
-  display:flex;align-items:center;gap:8px;
-  margin-bottom:4px;
-}
-.sb-nav{
-  display:flex;
-  flex-direction:column;
-  gap:6px;
-  margin-bottom:8px;
-}
-.sb-link{
-  border-radius:12px;
-  border:1px solid transparent;
-  padding:8px 10px;
-  background:transparent;
-  color:var(--muted);
-  display:flex;align-items:center;gap:8px;
-  cursor:pointer;
-  font-size:.9rem;
-}
-.sb-link.active,.sb-link:hover{
-  background:var(--panel);
-  border-color:rgba(255,255,255,.08);
-  color:var(--text);
+/* =========================================================
+   VARIABLES PRINCIPALES (TEMA PREMIUM ROCA STEAK HOUSE)
+   ========================================================= */
+:root {
+  --bg-body: #050509;
+  --bg-panel: #15151b;
+  --bg-panel-alt: #191922;
+  --bg-sidebar: #0b0b10;
+  --bg-input: #101018;
+  --bg-toast: #111119;
+
+  --text: #f5f5f7;
+  --muted: #a1a1b0;
+  --border-soft: rgba(255, 255, 255, 0.08);
+
+  --accent: #e63946;
+  /* Rojo vino principal */
+  --accent-dark: #b0202b;
+  /* Rojo más oscuro */
+  --accent-soft: rgba(230, 57, 70, 0.16);
+
+  --success-soft: rgba(34, 197, 94, 0.16);
+  --success: #4ade80;
+
+  --warning-soft: rgba(250, 204, 21, 0.18);
+  --warning: #fde68a;
+
+  --error-soft: rgba(239, 68, 68, 0.18);
+  --error: #f97373;
+
+  --shadow-soft: 0 18px 40px rgba(0, 0, 0, 0.55);
 }
 
-.panel-main{
-  padding:18px 20px 26px;
-}
-.panel-header{
-  display:flex;
-  align-items:flex-end;
-  justify-content:space-between;
-  margin-bottom:18px;
-  border-bottom:1px solid rgba(255,255,255,.08);
-  padding-bottom:10px;
-}
-.panel-header h1{margin:0;font-size:1.4rem}
-.panel-section{display:none}
-.panel-section.active{display:block}
-.muted{color:var(--muted);font-size:.9rem}
+/* =========================================================
+   GENERAL
+   ========================================================= */
 
-.table-wrap{
-  margin-top:12px;
-  border-radius:14px;
-  overflow:auto;
-  border:1px solid rgba(255,255,255,.1);
-  background:var(--panel);
-}
-table{width:100%;border-collapse:collapse;font-size:.9rem}
-th,td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.08)}
-th{text-align:left;color:var(--muted);font-weight:500}
-tr:last-child td{border-bottom:0}
-
-.mesas-grid{
-  margin-top:12px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:10px;
-}
-.mesa-card{
-  padding:10px;
-  border-radius:12px;
-  background:var(--panel);
-  border:1px solid rgba(255,255,255,.08);
-  text-align:center;
-  font-size:.85rem;
+.panel-body {
+  background: radial-gradient(circle at top, #1f1f2b 0, #050509 55%);
+  color: var(--text);
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
-.reservas-lista{
-  margin-top:14px;
-  display:grid;
-  gap:10px;
+.panel-layout {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  min-height: 100vh;
 }
-.res-card{
-  padding:12px;
-  border-radius:12px;
-  background:var(--panel);
-  border:1px solid rgba(255,255,255,.08);
-  font-size:.9rem;
-}
-.res-header{
-  display:flex;justify-content:space-between;gap:10px;
-  margin-bottom:6px;
-}
-.badge{
-  border-radius:999px;
-  padding:2px 8px;
-  font-size:.75rem;
-}
-.badge.ok{background:rgba(34,197,94,.18);color:#4ade80}
-.badge.pending{background:rgba(250,204,21,.2);color:#fde68a}
-.badge.info{background:rgba(59,130,246,.2);color:#bfdbfe}
 
-@media(max-width:900px){
-  .panel-layout{
-    grid-template-columns:1fr;
+/* =========================================================
+   SIDEBAR
+   ========================================================= */
+
+.sidebar {
+  background: radial-gradient(circle at top, #1a1a26 0, #05050a 60%);
+  padding: 18px 16px;
+  border-right: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 8px 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.sb-brand {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  color: var(--text);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.sb-brand ion-icon {
+  font-size: 1.4rem;
+  color: var(--accent);
+}
+
+.sb-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.sb-link {
+  border-radius: 12px;
+  border: 1px solid transparent;
+  padding: 8px 11px;
+  background: transparent;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.25s ease;
+}
+
+.sb-link ion-icon {
+  font-size: 1.1rem;
+}
+
+.sb-link.active,
+.sb-link:hover {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* BOTONES SIDE / GENERALES */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  border-radius: 999px;
+  padding: 8px 12px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: var(--accent-soft);
+  color: var(--text);
+  transition: 0.25s ease;
+}
+
+.btn.full {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn.ghost {
+  background: transparent;
+  border-color: var(--border-soft);
+}
+
+.btn.text {
+  background: transparent;
+  color: var(--muted);
+}
+
+.btn:hover {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: #ffffff;
+}
+
+/* =========================================================
+   PANEL PRINCIPAL
+   ========================================================= */
+
+.panel-main {
+  padding: 20px 22px 26px;
+  max-width: 1120px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.panel-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--border-soft);
+  padding-bottom: 10px;
+}
+
+.panel-header h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.panel-header p {
+  margin: 2px 0 0;
+}
+
+.panel-section {
+  display: none;
+  animation: fadeIn 0.3s ease;
+}
+
+.panel-section.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
   }
-  .sidebar{
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  .sb-nav{
-    flex-direction:row;
-    flex-wrap:wrap;
+}
+
+.muted {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* =========================================================
+   TOAST (REUTILIZABLE)
+   ========================================================= */
+
+.toast {
+  position: fixed;
+  right: 20px;
+  bottom: 24px;
+  background: var(--bg-toast);
+  border-radius: 14px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.toast-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+}
+
+.toast-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.toast-message {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+/* =========================================================
+   FORMULARIOS DE RESERVA
+   ========================================================= */
+
+.section-reserva {
+  padding: 10px 0 20px;
+  max-width: 920px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.section-reserva h2 {
+  font-size: 1.4rem;
+  margin-bottom: 6px;
+}
+
+.reserva-form {
+  display: grid;
+  gap: 16px;
+  margin-top: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group.two-cols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.form-group label {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.help-text {
+  font-size: 0.78rem;
+  color: var(--muted);
+  opacity: 0.85;
+}
+
+/* Inputs */
+input,
+select,
+textarea {
+  background: var(--bg-input);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 9px 11px;
+  font-size: 0.94rem;
+  transition: 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(209, 213, 219, 0.55);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--accent-soft);
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Botón enviar */
+.btn-submit {
+  border-radius: 999px;
+  padding: 11px 16px;
+  border: none;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 12px 25px rgba(230, 57, 70, 0.45);
+  transition: 0.2s ease;
+}
+
+.btn-submit.primary:hover {
+  background: var(--accent-dark);
+  box-shadow: 0 16px 35px rgba(230, 57, 70, 0.7);
+}
+
+/* =========================================================
+   MESAS
+   ========================================================= */
+
+.mesas-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.mesas-legend .dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.mesas-legend .dot.free {
+  background: #16a34a;
+}
+
+.mesas-legend .dot.busy {
+  background: #dc2626;
+}
+
+.mesas-legend .dot.selected {
+  background: var(--accent);
+}
+
+.mesas-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+}
+
+.mesa-card {
+  padding: 12px 13px;
+  border-radius: 14px;
+  background: var(--bg-panel);
+  border: 1px solid var(--border-soft);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: 0.2s ease;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+}
+
+.mesa-card.brillo:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 18px 35px rgba(0, 0, 0, 0.65);
+  border-color: var(--accent);
+}
+
+.mesa-card .mesa-numero {
+  font-weight: 600;
+}
+
+.mesa-card .mesa-detalle {
+  margin-top: 4px;
+}
+
+/* Mesa seleccionada */
+.mesa-card.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+  border-color: var(--accent);
+  color: #ffffff;
+}
+
+/* Mesa ocupada (si se usa desde JS) */
+.mesa-card.ocupada {
+  background: #b91c1c;
+  border-color: #7f1d1d;
+  color: #fef2f2;
+  cursor: not-allowed;
+  opacity: 0.9;
+}
+
+/* Versión admin para mesas (menos brillo) */
+.mesa-card.admin {
+  box-shadow: 0 10px 22px rgba(0, 0, 0, 0.5);
+}
+
+/* =========================================================
+   TARJETAS DE RESERVA DEL CLIENTE
+   ========================================================= */
+
+.reservas-lista {
+  margin-top: 14px;
+  display: grid;
+  gap: 10px;
+}
+
+.res-card {
+  padding: 12px 13px;
+  border-radius: 14px;
+  background: var(--bg-panel-alt);
+  border: 1px solid var(--border-soft);
+  font-size: 0.88rem;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.55);
+}
+
+.res-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  align-items: center;
+}
+
+.res-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+.res-info div {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.res-info ion-icon {
+  font-size: 0.98rem;
+}
+
+.res-notas {
+  margin-top: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 0.84rem;
+}
+
+.res-notas ion-icon {
+  margin-top: 1px;
+}
+
+/* =========================================================
+   BADGES DE ESTADO
+   ========================================================= */
+
+.badge {
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.77rem;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+
+.badge.ok {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge.pending {
+  background: var(--warning-soft);
+  color: var(--warning);
+}
+
+.badge.error {
+  background: var(--error-soft);
+  color: var(--error);
+}
+
+/* =========================================================
+   TABLAS (ADMIN)
+   ========================================================= */
+
+.table-wrap {
+  margin-top: 12px;
+  border-radius: 14px;
+  overflow: auto;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-panel);
+  box-shadow: 0 16px 35px rgba(0, 0, 0, 0.55);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+th,
+td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  vertical-align: middle;
+}
+
+th {
+  text-align: left;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* =========================================================
+   BOTONES PEQUEÑOS ✔ ✖
+   ========================================================= */
+
+.btn.tiny {
+  padding: 6px 10px;
+  font-size: 0.82rem;
+  border-radius: 999px;
+  background: #101018;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+  color: white;
+  transition: 0.2s ease;
+}
+
+.btn.tiny:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* =========================================================
+   ADMIN STATS
+   ========================================================= */
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+  margin: 14px 0 16px;
+}
+
+.stat-card {
+  background: var(--bg-panel);
+  border-radius: 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 0.85rem;
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.55);
+}
+
+.stat-card span {
+  color: var(--muted);
+}
+
+.stat-card strong {
+  font-size: 1.2rem;
+}
+
+/* =========================================================
+   POP VISUAL
+   ========================================================= */
+
+.pop-change {
+  margin: 8px 0 4px;
+  font-size: 0.85rem;
+  color: var(--text);
+  background: rgba(59, 130, 246, 0.18);
+  border: 1px solid rgba(59, 130, 246, 0.35);
+  border-radius: 999px;
+  padding: 6px 10px;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: 0.25s ease;
+}
+
+.pop-change.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   FLATPICKR ESTILO OSCURO
+   ========================================================= */
+
+.flatpickr-calendar {
+  background: #101018 !important;
+  border: 1px solid var(--border-soft) !important;
+  color: #f9fafb !important;
+  box-shadow: var(--shadow-soft) !important;
+}
+
+.flatpickr-months,
+.flatpickr-weekdays {
+  background: #0f172a !important;
+}
+
+.flatpickr-day {
+  color: #e5e7eb !important;
+}
+
+.flatpickr-day.today {
+  border-color: var(--accent) !important;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.startRange,
+.flatpickr-day.endRange {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+}
+
+.flatpickr-day:hover {
+  background: var(--accent-soft) !important;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .panel-layout {
+    grid-template-columns: 1fr;
   }
+
+  /* SIDEBAR -> TOP NAVIGATION BAR */
+  .sidebar {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-right: none;
+    border-bottom: 1px solid var(--border-soft);
+    background: rgba(11, 11, 16, 0.95);
+    /* Fondo semitransparente */
+    backdrop-filter: blur(10px);
+  }
+
+  .sb-brand {
+    margin-bottom: 0;
+    font-size: 0;
+    /* Ocultar texto del logo */
+  }
+
+  .sb-brand ion-icon {
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin: 0;
+  }
+
+  .sb-nav {
+    flex-direction: row;
+    flex: 1;
+    justify-content: center;
+    gap: 8px;
+    /* Espacio entre iconos */
+    margin-bottom: 0;
+  }
+
+  .sb-link {
+    padding: 10px;
+    justify-content: center;
+    border-radius: 12px;
+  }
+
+  .sb-link span {
+    display: none;
+    /* Icon only */
+  }
+
+  .sb-link ion-icon {
+    font-size: 1.5rem;
+  }
+
+  /* Botones 'Cerrar sesión' y 'Volver' */
+  #btnLogoutAdmin,
+  #btnLogoutCliente {
+    width: auto;
+    font-size: 0;
+    padding: 10px;
+    margin: 0;
+  }
+
+  #btnLogoutAdmin ion-icon,
+  #btnLogoutCliente ion-icon {
+    font-size: 1.6rem;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  #btnLogoutAdmin:hover ion-icon,
+  #btnLogoutCliente:hover ion-icon {
+    color: #fff;
+  }
+
+  .sidebar .btn.text.full {
+    display: none;
+    /* Ocultar 'Volver al inicio' para ahorrar espacio */
+  }
+
+  /* Ajuste del contenido principal */
+  .panel-main {
+    padding: 20px 16px;
+  }
+
+  .form-group.two-cols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+/* =========================================================
+   FIX ESPECÍFICO PARA FLATPICKR EN LOS INPUTS
+   ========================================================= */
+input.flatpickr-input {
+  appearance: auto !important;
+  background: var(--bg-input, #111118) !important;
+  cursor: pointer !important;
+  color: #fff !important;
+}
+
+/* =========================================================
+   ASEGURAR QUE LAS MESAS SE VEAN BIEN
+   ========================================================= */
+.mesas-grid {
+  margin-top: 16px !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+  gap: 16px !important;
+  width: 100%;
+  min-height: 220px;
+  padding-bottom: 20px;
+}
+
+.mesa-card {
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

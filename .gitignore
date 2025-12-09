@@ -1,0 +1,14 @@
+# Dependencias
+node_modules/
+package-lock.json
+
+# Entorno y Secretos
+.env
+
+# Logs
+npm-debug.log
+*.log
+
+# Sistema Operativo
+.DS_Store
+Thumbs.db

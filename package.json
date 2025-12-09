@@ -1,0 +1,12 @@
+{
+    "name": "proyecto-roca-root",
+    "version": "1.0.0",
+    "description": "Root package to manage backend startup",
+    "scripts": {
+        "start": "cd backend && npm start",
+        "dev": "cd backend && npm run dev",
+        "install-backend": "cd backend && npm install",
+        "reset-db": "cd backend && node setup_db.js",
+        "seed-db": "cd backend && node seed_data.js"
+    }
+}

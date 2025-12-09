@@ -1,17 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Panel Cliente – Roca Steak House</title>
 
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/panel.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css">
+  <link rel="stylesheet" href="/css/panel.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
+  <!-- Íconos -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+
+  <!-- Flatpickr -->
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 </head>
+
 <body class="panel-body">
+
+  <!-- TOAST -->
   <div id="toast" class="toast">
     <div class="toast-icon"></div>
     <div class="toast-body">
@@ -22,24 +32,39 @@
   </div>
 
   <div class="panel-layout">
+
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="sb-brand">
         <ion-icon name="people-outline"></ion-icon>
         <span>Cliente</span>
       </div>
+
       <nav class="sb-nav">
-        <button class="sb-link active" data-view="nueva">Nueva reserva</button>
-        <button class="sb-link" data-view="mis">Mis reservas</button>
+        <button class="sb-link active" data-view="nueva">
+          <ion-icon name="calendar-outline"></ion-icon>
+          <span>Nueva reserva</span>
+        </button>
+        <button class="sb-link" data-view="mis">
+          <ion-icon name="book-outline"></ion-icon>
+          <span>Mis reservas</span>
+        </button>
       </nav>
+
       <button id="btnLogoutCliente" class="btn ghost full">
-        <ion-icon name="log-out-outline"></ion-icon> Cerrar sesión
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar sesión
       </button>
+
       <a class="btn text full" href="index.html">
-        <ion-icon name="home-outline"></ion-icon> Volver al inicio
+        <ion-icon name="home-outline"></ion-icon>
+        Volver al inicio
       </a>
     </aside>
 
+    <!-- MAIN PANEL -->
     <main class="panel-main">
+
       <header class="panel-header">
         <div>
           <h1>Panel del Cliente</h1>
@@ -47,55 +72,97 @@
         </div>
       </header>
 
-      <!-- Nueva Reserva -->
-      <section id="view-nueva" class="panel-section active">
+      <!-- ===================== NUEVA RESERVA ===================== -->
+      <section id="view-nueva" class="section-reserva panel-section active">
+
         <h2>Crear una nueva reserva</h2>
-        <p class="muted">Completa los siguientes datos y envía tu solicitud. Te confirmaremos lo antes posible.</p>
+        <p class="muted">
+          Selecciona la fecha, el horario permitido, una mesa disponible y el número de personas.
+        </p>
 
-        <form id="clienteReservaForm" class="form grid-2">
-          <div>
-            <label class="form-label">Fecha</label>
-            <input id="resFecha" type="date" class="form-input" required>
+        <form id="clienteReservaForm" class="reserva-form" autocomplete="off">
 
-            <label class="form-label">Hora</label>
-            <input id="resHora" type="time" class="form-input" required>
+          <input type="hidden" id="resId">
 
-            <label class="form-label">Número de personas</label>
-            <select id="resPersonas" class="form-input">
+          <div class="form-group two-cols">
+            <div>
+              <label for="resFecha">Fecha</label>
+              <input type="text" id="resFecha" class="flatpickr-input" placeholder="Selecciona una fecha" required>
+              <small class="help-text">Solo fechas desde hoy en adelante.</small>
+            </div>
+
+            <div>
+              <label for="resHora">Hora (12:00 - 23:45)</label>
+              <input type="text" id="resHora" class="flatpickr-input" placeholder="Selecciona la hora" required>
+              <small class="help-text">Intervalos de 15 minutos en horario permitido.</small>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Selecciona una mesa</label>
+
+            <input type="hidden" id="resMesa">
+
+            <div class="mesas-legend">
+              <span class="dot free"></span> Disponible
+              <span class="dot busy"></span> Ocupada *
+              <span class="dot selected"></span> Seleccionada
+            </div>
+
+            <div id="mesasGrid" class="mesas-grid"></div>
+            <small class="help-text">
+              * El estado ocupado depende de la lógica del backend.
+            </small>
+          </div>
+
+          <div class="form-group">
+            <label for="resPersonas">Número de personas</label>
+            <select id="resPersonas" required>
               <option value="2">2 personas</option>
               <option value="3">3 personas</option>
               <option value="4">4 personas</option>
               <option value="5">5 personas</option>
               <option value="6">6 personas</option>
+              <option value="7">7 personas</option>
+              <option value="8">8 personas</option>
+              <option value="9">9 personas</option>
+              <option value="10">10 personas</option>
+              <option value="11">11 personas</option>
+              <option value="12">12 personas</option>
             </select>
           </div>
 
-          <div>
-            <label class="form-label">Comentarios adicionales</label>
-            <textarea id="resNotas" rows="5" class="form-input"
-              placeholder="Ejemplo: Aniversario, cumple, mesa con vista, intolerancias alimentarias..."></textarea>
-
-            <div class="form-actions">
-              <button type="submit" class="btn primary">Enviar solicitud</button>
-            </div>
+          <div class="form-group">
+            <label for="resNotas">Comentarios adicionales</label>
+            <textarea id="resNotas"
+              placeholder="Ejemplo: aniversario, cumpleaños, mesa con vista, alergias..."></textarea>
           </div>
+
+          <button type="submit" class="btn-submit primary">
+            <ion-icon name="send-outline"></ion-icon>
+            Enviar solicitud
+          </button>
+
         </form>
       </section>
 
-      <!-- Mis reservas -->
+      <!-- ===================== MIS RESERVAS ===================== -->
       <section id="view-mis" class="panel-section">
         <h2>Mis reservas</h2>
         <p class="muted">Aquí podrás ver el estado de tus reservas enviadas.</p>
 
+        <div id="estadoNotificacion" class="pop-change"></div>
         <div id="misReservasLista" class="reservas-lista"></div>
       </section>
 
     </main>
   </div>
 
-  <script src="js/ui.js"></script>
-  <script src="js/auth.js"></script>
-  <script src="js/cliente.js"></script>
+  <!-- JS -->
+  <script src="/js/ui.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/cliente.js"></script>
+
 </body>
+
 </html>
-  

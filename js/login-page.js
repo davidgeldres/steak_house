@@ -1,98 +1,202 @@
-// login-page.js - comportamiento de login.html
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
+  
+  // 1. LÓGICA DE PESTAÑAS
   const tabs = document.querySelectorAll(".login-tab");
   const panels = {
     login: document.getElementById("login-panel"),
     register: document.getElementById("register-panel")
   };
 
-  tabs.forEach(tab=>{
-    tab.addEventListener("click", ()=>{
-      tabs.forEach(t=>t.classList.remove("active"));
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      tabs.forEach(t => t.classList.remove("active"));
       tab.classList.add("active");
-
       const tabName = tab.dataset.tab;
-      Object.keys(panels).forEach(k=>{
+      Object.keys(panels).forEach(k => {
         panels[k].classList.toggle("active", k === tabName);
       });
     });
   });
 
+  // 2. MOSTRAR / OCULTAR CONTRASEÑA
+  document.querySelectorAll(".toggle-pass").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const targetId = btn.dataset.target;
+      const input = document.getElementById(targetId);
+      const icon = btn.querySelector("ion-icon");
+
+      if (input.type === "password") {
+        input.type = "text";
+        icon.setAttribute("name", "eye-off-outline");
+      } else {
+        input.type = "password";
+        icon.setAttribute("name", "eye-outline");
+      }
+    });
+  });
+
+  // 3. LOGIN CORREGIDO
   const loginForm = document.getElementById("loginForm");
-  const loginMsg  = document.getElementById("loginMsg");
-  const loginRole = document.getElementById("loginRole");
+  const loginMsg = document.getElementById("loginMsg");
 
-  document.getElementById("btnDemoCliente").addEventListener("click", ()=>{
-    document.getElementById("loginUser").value = "cliente";
-    document.getElementById("loginPass").value = "1234";
-    loginRole.value = "cliente";
-  });
-  document.getElementById("btnDemoAdmin").addEventListener("click", ()=>{
-    document.getElementById("loginUser").value = "admin";
-    document.getElementById("loginPass").value = "1234";
-    loginRole.value = "admin";
-  });
+  if (loginForm) {
+    loginForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-  loginForm.addEventListener("submit", (e)=>{
-    e.preventDefault();
-    const user = document.getElementById("loginUser").value.trim();
-    const pass = document.getElementById("loginPass").value.trim();
-    const role = loginRole.value;
+      // CAMBIO: Usar email en lugar de dato
+      const email = document.getElementById("loginUser").value.trim();
+      const password = document.getElementById("loginPass").value.trim();
 
-    if(!user || !pass){
-      loginMsg.textContent = "Completa usuario y contraseña.";
-      loginMsg.style.color = "#f97373";
-      return;
-    }
+      if (!email || !password) {
+        loginMsg.textContent = "Completa todos los campos.";
+        loginMsg.style.color = "#f87171";
+        return;
+      }
 
-    // DEMO: usuario/clave fijos
-    if(pass !== "1234"){
-      loginMsg.textContent = "Contraseña incorrecta (demo: 1234).";
-      loginMsg.style.color = "#f97373";
-      showToast("Error de acceso","Contraseña incorrecta","error");
-      return;
-    }
+      try {
+        loginMsg.textContent = "Verificando...";
+        loginMsg.style.color = "#ccc";
 
-    const current = { id: Date.now(), username:user, role };
-    setCurrentUser(current);
+        // DEBUG: Verificar URL
+        const baseUrl = (typeof API_URL !== 'undefined') ? API_URL : "http://localhost:4001/api";
+        console.log("URL de login:", `${baseUrl}/auth/login`);
+        console.log("Email enviado:", email);
 
-    showToast("Bienvenido",`Has iniciado sesión como ${role}.`,"success");
-    // redirigir según rol
-    setTimeout(()=>{
-      if(role === "admin") window.location.href = "admin.html";
-      else window.location.href = "cliente.html";
-    }, 700);
-  });
+        const res = await fetch(`${baseUrl}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          // CAMBIO: Usar { email, password } en lugar de { dato, password }
+          body: JSON.stringify({ email, password })
+        });
 
+        // DEBUG: Verificar respuesta
+        console.log("Status:", res.status);
+        
+        const data = await res.json();
+        console.log("Respuesta del servidor:", data);
+
+        if (!res.ok) {
+          throw new Error(data.message || "Credenciales incorrectas");
+        }
+
+        // GUARDAR SESIÓN
+        if (typeof setSession === "function") {
+          setSession(data.token, data.user);
+        } else {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+        }
+
+        // TOAST opcional
+        if (typeof showToast === "function") {
+          showToast("Bienvenido", `Hola ${data.user.nombre}`, "success");
+        }
+
+        loginMsg.textContent = "¡Acceso correcto!";
+        loginMsg.style.color = "#4ade80";
+
+        setTimeout(() => {
+          if (data.user.rol === "admin") {
+            window.location.href = "admin.html";
+          } else {
+            window.location.href = "cliente.html";
+          }
+        }, 1000);
+
+      } catch (error) {
+        console.error("Error en login:", error);
+        loginMsg.textContent = error.message || "Error al iniciar sesión. Verifica tus credenciales.";
+        loginMsg.style.color = "#f87171";
+        
+        if (typeof showToast === "function") {
+          showToast("Error", error.message || "Error de autenticación", "error");
+        }
+      }
+    });
+  }
+
+  // 4. REGISTRO
   const regForm = document.getElementById("registerForm");
-  const regMsg  = document.getElementById("regMsg");
+  const regMsg = document.getElementById("regMsg");
 
-  regForm.addEventListener("submit",(e)=>{
-    e.preventDefault();
-    const u  = document.getElementById("regUser").value.trim();
-    const em = document.getElementById("regEmail").value.trim();
-    const p1 = document.getElementById("regPass1").value.trim();
-    const p2 = document.getElementById("regPass2").value.trim();
+  if (regForm) {
+    regForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    if(!u || !em || !p1 || !p2){
-      regMsg.textContent = "Completa todos los campos.";
-      regMsg.style.color = "#f97373";
-      return;
-    }
-    if(p1 !== p2){
-      regMsg.textContent = "Las contraseñas no coinciden.";
-      regMsg.style.color = "#f97373";
-      return;
-    }
-    if(p1.length < 6){
-      regMsg.textContent = "La contraseña debe tener al menos 6 caracteres.";
-      regMsg.style.color = "#f97373";
-      return;
-    }
+      const nombre = document.getElementById("regUser").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const p1 = document.getElementById("regPass1").value.trim();
+      const p2 = document.getElementById("regPass2").value.trim();
 
-    // DEMO: solo mostramos mensaje. Aquí iría tu fetch() al backend.
-    regMsg.textContent = "Cuenta creada (demo). Ahora inicia sesión.";
-    regMsg.style.color = "#4ade80";
-    showToast("Cuenta creada","Tu cuenta se creó correctamente (demo).","success");
-  });
+      if (!nombre || !email || !p1 || !p2) {
+        regMsg.textContent = "Todos los campos son obligatorios.";
+        regMsg.style.color = "#f87171";
+        return;
+      }
+
+      // Validar formato de email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        regMsg.textContent = "Ingresa un email válido.";
+        regMsg.style.color = "#f87171";
+        return;
+      }
+
+      if (p1 !== p2) {
+        regMsg.textContent = "Las contraseñas no coinciden.";
+        regMsg.style.color = "#f87171";
+        return;
+      }
+
+      if (p1.length < 6) {
+        regMsg.textContent = "La contraseña es muy corta (mínimo 6 caracteres).";
+        regMsg.style.color = "#f87171";
+        return;
+      }
+
+      try {
+        regMsg.textContent = "Creando cuenta...";
+        regMsg.style.color = "#ccc";
+
+        const baseUrl = (typeof API_URL !== 'undefined') ? API_URL : "http://localhost:4001/api";
+
+        const res = await fetch(`${baseUrl}/auth/register`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ nombre, email, password: p1 })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.message || "Error al registrarse");
+        }
+
+        if (typeof showToast === "function") {
+          showToast("Cuenta creada", "Registro exitoso. Ahora inicia sesión.", "success");
+        }
+
+        regMsg.textContent = "¡Cuenta creada con éxito!";
+        regMsg.style.color = "#4ade80";
+
+        regForm.reset();
+
+        setTimeout(() => {
+          const tabLogin = document.querySelector('[data-tab="login"]');
+          if (tabLogin) tabLogin.click();
+          document.getElementById("loginUser").value = email;
+          document.getElementById("loginPass").focus();
+        }, 1500);
+
+      } catch (error) {
+        console.error("Error en registro:", error);
+        regMsg.textContent = error.message || "Error al crear la cuenta";
+        regMsg.style.color = "#f87171";
+        
+        if (typeof showToast === "function") {
+          showToast("Error", error.message || "Error en registro", "error");
+        }
+      }
+    });
+  }
 });
