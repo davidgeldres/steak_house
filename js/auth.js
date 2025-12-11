@@ -1,6 +1,8 @@
 // auth.js - Funciones de autenticación y utilidades globales
 
-const API_URL = "http://localhost:4001/api";
+const API_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+  ? "http://localhost:4001/api"
+  : "https://steak-house-1.onrender.com/api";
 
 /* ============================================================
    GESTIÓN DE SESIÓN
