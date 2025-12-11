@@ -1,45 +1,43 @@
-require('dotenv').config();
+const db = require('./db');
 const bcrypt = require('bcryptjs');
-const mysql = require('mysql2/promise');
 
-const dbConfig = {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-};
+const config = require('./config');
 
-async function testLogin() {
+async function debugLogin() {
+    console.log('DB Config:', {
+        host: config.db.host,
+        user: config.db.user,
+        database: config.db.database
+    });
+
     try {
-        const connection = await mysql.createConnection(dbConfig);
-        console.log('Connected to DB');
+        const email = 'davidadmin@gmail.com';
+        const pass = 'admin123';
 
-        const email = 'adminpro@roca.com';
-        const password = 'Admin123!';
+        console.log(`Checking user: ${email}...`);
+        const [rows] = await db.query('SELECT * FROM usuarios WHERE email = ?', [email]);
 
-        // 1. Check if user exists
-        const [rows] = await connection.query('SELECT * FROM usuarios WHERE email = ?', [email]);
         if (rows.length === 0) {
-            console.log('User not found');
+            console.log('User NOT FOUND in DB');
             return;
         }
 
         const user = rows[0];
-        console.log('User found:', user.email);
-        console.log('Stored Hash:', user.password);
+        console.log('User found:', {
+            id: user.id,
+            email: user.email,
+            rol: user.rol,
+            hashStart: user.password.substring(0, 10) + '...'
+        });
 
-        // 2. Verify password
-        const match = await bcrypt.compare(password, user.password);
-        console.log('Password match:', match);
+        const match = await bcrypt.compare(pass, user.password);
+        console.log(`Password '${pass}' matches? ${match}`);
 
-        // 3. Generate new hash to compare
-        const newHash = await bcrypt.hash(password, 10);
-        console.log('New Hash for Admin123!:', newHash);
-
-        await connection.end();
-    } catch (error) {
-        console.error('Error:', error);
+    } catch (err) {
+        console.error('Error:', err);
+    } finally {
+        await db.end();
     }
 }
 
-testLogin();
+debugLogin();

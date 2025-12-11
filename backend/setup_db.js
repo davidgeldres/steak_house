@@ -5,13 +5,15 @@ const dbConfig = {
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT,
   multipleStatements: true // Enable multiple statements for the script
 };
 
 const sql = `
-DROP DATABASE IF EXISTS roca_steak;
-CREATE DATABASE roca_steak;
-USE roca_steak;
+DROP TABLE IF EXISTS reservas;
+DROP TABLE IF EXISTS mesas;
+DROP TABLE IF EXISTS usuarios;
 
 CREATE TABLE usuarios (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -61,10 +63,10 @@ async function setup() {
   try {
     const connection = await mysql.createConnection(dbConfig);
     console.log('Connected to MySQL server.');
-    
+
     await connection.query(sql);
     console.log('Database roca_steak created and tables initialized successfully.');
-    
+
     await connection.end();
   } catch (error) {
     console.error('Error initializing database:', error);

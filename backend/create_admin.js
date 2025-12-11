@@ -26,11 +26,15 @@ async function createAdmin() {
             console.log('Usuario actualizado correctametne.');
         } else {
             console.log('Creando usuario...');
-            await db.query(
+            const [res] = await db.query(
                 'INSERT INTO usuarios (nombre, email, password, rol) VALUES (?, ?, ?, ?)',
                 [nombre, email, passwordHash, rol]
             );
-            console.log('Usuario creado exitosamente.');
+            console.log('Usuario creado exitosamente. Insert ID:', res.insertId);
+
+            // VERIFICAR INMEDIATAMENTE
+            const [check] = await db.query('SELECT * FROM usuarios WHERE id = ?', [res.insertId]);
+            console.log('Verificación inmediata:', check.length > 0 ? 'ENCONTRADO' : 'NO ENCONTRADO');
         }
 
     } catch (error) {

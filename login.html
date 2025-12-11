@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,21 +11,52 @@
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <style>
     /* Estilos forzados para el Ojo */
-    .password-group { position: relative !important; width: 100%; display: block; margin-bottom: 12px; }
-    .password-group input { width: 100%; padding-right: 45px !important; box-sizing: border-box; }
-    .toggle-pass {
-      position: absolute !important; right: 10px !important; top: 50% !important;
-      transform: translateY(-50%) !important; background: transparent !important;
-      border: none !important; outline: none !important; cursor: pointer;
-      font-size: 1.3rem; color: #9ca3af; display: flex;
-      align-items: center; justify-content: center; z-index: 10;
-      padding: 0 !important; height: auto !important;
+    .password-group {
+      position: relative !important;
+      width: 100%;
+      display: block;
+      margin-bottom: 12px;
     }
-    .toggle-pass:hover { color: #e63946; }
+
+    .password-group input {
+      width: 100%;
+      padding-right: 45px !important;
+      box-sizing: border-box;
+    }
+
+    .toggle-pass {
+      position: absolute !important;
+      right: 10px !important;
+      top: 50% !important;
+      transform: translateY(-50%) !important;
+      background: transparent !important;
+      border: none !important;
+      outline: none !important;
+      cursor: pointer;
+      font-size: 1.3rem;
+      color: #9ca3af;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      padding: 0 !important;
+      height: auto !important;
+    }
+
+    .toggle-pass:hover {
+      color: #e63946;
+    }
   </style>
 </head>
+
 <body class="login-body">
-  <div id="toast" class="toast"><div class="toast-icon"></div><div class="toast-body"><div id="toast-title" class="toast-title"></div><div id="toast-message" class="toast-message"></div></div><button id="toast-close" class="toast-close">&times;</button></div>
+  <div id="toast" class="toast">
+    <div class="toast-icon"></div>
+    <div class="toast-body">
+      <div id="toast-title" class="toast-title"></div>
+      <div id="toast-message" class="toast-message"></div>
+    </div><button id="toast-close" class="toast-close">&times;</button>
+  </div>
 
   <div class="login-wrapper">
     <a href="index.html" class="back-home"><ion-icon name="chevron-back-outline"></ion-icon> Volver al inicio</a>
@@ -43,19 +75,15 @@
         <form id="loginForm" class="form">
           <label class="form-label">Usuario o correo</label>
           <input id="loginUser" class="form-input" type="text" required placeholder="Ingresa tu usuario o correo">
-          
+
           <label class="form-label">Contraseña</label>
           <div class="password-group">
             <input id="loginPass" class="form-input" type="password" required placeholder="Ingresa tu contraseña">
-            <button type="button" class="toggle-pass" data-target="loginPass"><ion-icon name="eye-outline"></ion-icon></button>
+            <button type="button" class="toggle-pass" data-target="loginPass"><ion-icon
+                name="eye-outline"></ion-icon></button>
           </div>
 
-          <label class="form-label">Tipo de acceso</label>
-          <select id="loginRole" class="form-input">
-            <option value="cliente">Cliente</option>
-            <option value="admin">Administrador</option>
-          </select>
-          
+
           <div class="form-actions">
             <button type="submit" class="btn primary" style="width: 100%; justify-content: center;">Ingresar</button>
           </div>
@@ -70,18 +98,19 @@
           <input id="regUser" class="form-input" type="text" required>
           <label class="form-label">Correo</label>
           <input id="regEmail" class="form-input" type="email" required>
-          
+
           <label class="form-label">Contraseña (Mín. 6 dígitos)</label>
           <div class="password-group">
             <input id="regPass1" class="form-input" type="password" required minlength="6">
-            <button type="button" class="toggle-pass" data-target="regPass1"><ion-icon name="eye-outline"></ion-icon></button>
+            <button type="button" class="toggle-pass" data-target="regPass1"><ion-icon
+                name="eye-outline"></ion-icon></button>
           </div>
-          
+
           <label class="form-label">Repetir contraseña</label>
           <div class="password-group">
             <input id="regPass2" class="form-input" type="password" required minlength="6">
           </div>
-          
+
           <div class="form-actions"><button type="submit" class="btn primary">Crear cuenta</button></div>
           <p id="regMsg" class="form-msg"></p>
         </form>
@@ -93,4 +122,5 @@
   <script src="js/login-page.js"></script>
 
 </body>
+
 </html>
