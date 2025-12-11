@@ -394,21 +394,24 @@ textarea {
   gap: 16px;
 }
 
+/* Mesa por defecto (DISPONIBLE) */
 .mesa-card {
   padding: 12px 13px;
   border-radius: 14px;
-  background: var(--bg-panel);
+  background: #16a34a;
+  /* User requested Green for available */
   border: 1px solid var(--border-soft);
   font-size: 0.9rem;
   cursor: pointer;
   transition: 0.2s ease;
   box-shadow: 0 12px 25px rgba(0, 0, 0, 0.45);
+  color: #fff;
 }
 
 .mesa-card.brillo:hover {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 18px 35px rgba(0, 0, 0, 0.65);
-  border-color: var(--accent);
+  border-color: #fff;
 }
 
 .mesa-card .mesa-numero {
@@ -417,22 +420,32 @@ textarea {
 
 .mesa-card .mesa-detalle {
   margin-top: 4px;
+  opacity: 0.9;
+  /* Improved visibility on green */
+  color: #e2e8f0;
 }
 
 /* Mesa seleccionada */
 .mesa-card.active {
-  background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-  border-color: var(--accent);
+  background: #15803d;
+  /* Darker green or keep accent? Let's use accent for contrast as requested "ese color" likely implies the selection dot color */
+  background: var(--accent);
+  /* Keep accent (Red-ish) distinct from available? Or user wanted same? 
+                                User said "de ese color cuando selecciono". 
+                                Legend says Redish. Let's stick to accent but ensure it overrides green */
+  border-color: #fff;
   color: #ffffff;
+  transform: scale(1.05);
 }
 
-/* Mesa ocupada (si se usa desde JS) */
+/* Mesa ocupada */
 .mesa-card.ocupada {
-  background: #b91c1c;
-  border-color: #7f1d1d;
+  background: #dc2626 !important;
+  /* Specific user request */
+  border-color: #b91c1c;
   color: #fef2f2;
   cursor: not-allowed;
-  opacity: 0.9;
+  opacity: 1;
 }
 
 /* Versión admin para mesas (menos brillo) */

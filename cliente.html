@@ -155,6 +155,47 @@
         <div id="misReservasLista" class="reservas-lista"></div>
       </section>
 
+      <!-- MODAL EDICIÓN -->
+      <dialog id="modalEditar" class="modal">
+        <div class="modal-content">
+          <h3>Editar Reserva</h3>
+          <form id="formEditar">
+            <input type="hidden" id="editId">
+
+            <div class="form-group">
+              <label>Fecha</label>
+              <input type="text" id="editFecha" class="flatpickr-input" required>
+            </div>
+            <div class="form-group">
+              <label>Hora</label>
+              <input type="text" id="editHora" class="flatpickr-input" required>
+            </div>
+            <div class="form-group">
+              <label>Personas</label>
+              <select id="editPersonas" required>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Notas</label>
+              <textarea id="editNotas"></textarea>
+            </div>
+            <div class="modal-actions">
+              <button type="button" class="btn ghost" id="btnCerrarModal">Cancelar</button>
+              <button type="submit" class="btn primary">Guardar Cambios</button>
+            </div>
+          </form>
+        </div>
+      </dialog>
+
     </main>
   </div>
 

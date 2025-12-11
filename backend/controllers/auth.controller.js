@@ -102,6 +102,10 @@ async function login(req, res) {
       { expiresIn: config.jwt.expiresIn }
     );
 
+    // AUDITORÍA
+    const { logAction } = require("../utils/logger");
+    await logAction(user.id, "LOGIN", "Inicio de sesión exitoso");
+
     return res.json({
       message: "Bienvenido",
       token,

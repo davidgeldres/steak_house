@@ -8,4 +8,11 @@ router.get("/usuario/:usuario_id", verifyToken, resCtrl.listarReservasPorUsuario
 router.post("/", verifyToken, resCtrl.crearReserva);
 router.patch("/:id/estado", verifyAdmin, resCtrl.actualizarEstado);
 
+// Acciones Cliente
+router.patch("/:id/cancelar", verifyToken, resCtrl.cancelarReservaCliente);
+router.put("/:id", verifyToken, resCtrl.editarReservaCliente);
+
+// Disponibilidad
+router.get("/disponibilidad", verifyToken, resCtrl.consultarDisponibilidad);
+
 module.exports = router;

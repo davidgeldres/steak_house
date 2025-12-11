@@ -5,5 +5,19 @@
     "email": "david@gmail.com",
     "rol": "cliente",
     "fecha_registro": "2025-12-09T13:41:04.086Z"
+  },
+  {
+    "id": 2,
+    "nombre": "david",
+    "email": "david@gmail.com",
+    "rol": "cliente",
+    "fecha_registro": "2025-12-11T11:05:01.906Z"
+  },
+  {
+    "id": 3,
+    "nombre": "jhon",
+    "email": "Jhon@gmail.com",
+    "rol": "cliente",
+    "fecha_registro": "2025-12-11T16:51:04.214Z"
   }
 ]

@@ -1,13 +1,13 @@
 const db = require("../db");
 
 async function getAllMesas() {
-  const [rows] = await db.query("SELECT * FROM mesas ORDER BY numero");
+  const [rows] = await db.query("SELECT *, nombre as numero FROM mesas ORDER BY id");
   return rows;
 }
 
 async function createMesa({ numero, capacidad }) {
   const [res] = await db.query(
-    "INSERT INTO mesas (numero, capacidad) VALUES (?, ?)",
+    "INSERT INTO mesas (nombre, capacidad) VALUES (?, ?)",
     [numero, capacidad]
   );
   return res.insertId;
@@ -15,7 +15,7 @@ async function createMesa({ numero, capacidad }) {
 
 async function updateMesa(id, { numero, capacidad }) {
   await db.query(
-    "UPDATE mesas SET numero = ?, capacidad = ? WHERE id = ?",
+    "UPDATE mesas SET nombre = ?, capacidad = ? WHERE id = ?",
     [numero, capacidad, id]
   );
 }

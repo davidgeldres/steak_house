@@ -10,4 +10,4 @@ pool.getConnection()
   .then(() => console.log("MySQL conectado correctamente"))
   .catch(err => console.error("Error MySQL:", err));
 
-module.exports = pool;
+module.exports = pool;  

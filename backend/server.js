@@ -12,6 +12,8 @@ app.use("/api/auth", require("./routes/auth.routes"));
 app.use("/api/mesas", require("./routes/mesas.routes"));
 app.use("/api/reservas", require("./routes/reservas.routes"));
 app.use("/api/usuarios", require("./routes/usuarios.routes"));
+app.use("/api/reportes", require("./routes/reportRoutes"));
+app.use("/api/bloqueos", require("./routes/bloqueos.routes")); // NUEVO
 
 // BASE DE DATOS 
 const pool = require("./db");

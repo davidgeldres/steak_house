@@ -26,13 +26,15 @@ CREATE TABLE usuarios (
 
 CREATE TABLE mesas (
   id INT PRIMARY KEY AUTO_INCREMENT,
-  numero VARCHAR(50) NOT NULL,
+  nombre VARCHAR(50) NOT NULL,
   capacidad INT DEFAULT 4
 );
 
-INSERT INTO mesas (numero, capacidad) VALUES
-('1', 4),('2', 4),('3', 4),('4', 4),('5', 6),('6', 6),
-('7', 2),('8', 2),('9', 4),('10', 4),('11', 8),('12', 8);
+-- Insertar mesas (Compatible con esquema usuario + columna capacidad)
+INSERT INTO mesas (nombre, capacidad) VALUES
+('Mesa 1', 4),('Mesa 2', 4),('Mesa 3', 4),('Mesa 4', 4),
+('Mesa 5', 6),('Mesa 6', 6),('Mesa 7', 2),('Mesa 8', 2),
+('Mesa 9', 4),('Mesa 10', 4),('Mesa 11', 8),('Mesa 12', 8);
 
 CREATE TABLE reservas (
   id INT PRIMARY KEY AUTO_INCREMENT,
@@ -41,20 +43,22 @@ CREATE TABLE reservas (
   cliente_nombre VARCHAR(100),
   fecha DATE NOT NULL,
   hora TIME NOT NULL,
+  hora_fin TIME,  -- Compatible con esquema usuario
   personas INT DEFAULT 1,
   notas TEXT,
-  estado ENUM('pendiente', 'confirmada', 'cancelada') DEFAULT 'pendiente',
+  estado ENUM('pendiente', 'confirmada', 'cancelada', 'aceptada', 'rechazada') DEFAULT 'pendiente',
   creado TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
   FOREIGN KEY (usuario_id) REFERENCES usuarios(id),
   FOREIGN KEY (mesa_id) REFERENCES mesas(id)
 );
 
+-- Usuario ADMIN solicitado
 INSERT INTO usuarios (nombre, email, password, rol)
 VALUES (
-  'AdminPro',
-  'adminpro@roca.com',
-  '$2a$10$g3wfVbhcYuVymHilipY8KeOk83aqrZgbD9HE.SzwzFnP61xz6IdBO',
+  'Administrador',
+  'davidadmin@gmail.com',
+  '$2a$10$J1Xz3G0RubcA6SNSuqj5WeJtXHyHt5mqLY31WbMl7nHrX7wt3Ff0O', -- admin123
   'admin'
 );
 `;

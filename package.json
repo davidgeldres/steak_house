@@ -8,5 +8,9 @@
         "install-backend": "cd backend && npm install",
         "reset-db": "cd backend && node setup_db.js",
         "seed-db": "cd backend && node seed_data.js"
+    },
+    "dependencies": {
+        "chart.js": "^4.5.1",
+        "flatpickr": "^4.6.13"
     }
 }
