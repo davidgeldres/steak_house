@@ -42,9 +42,9 @@ app.use(express.static(path.join(__dirname, "../")));
 
 // INICIAR SERVIDOR 
 const PORT = process.env.PORT || 4001;
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`\n==================================================`);
-  console.log(`   SERVIDOR INICIADO EN http://localhost:${PORT}`);
-  console.log(`   VERSIÓN CON FIX DE LOGIN APLICADO`);
+  console.log(`   SERVIDOR INICIADO EN http://0.0.0.0:${PORT}`);
+  console.log(`   VERSIÓN CON FIX DE HOST (0.0.0.0) APLICADO`);
   console.log(`==================================================\n`);
 });
